@@ -5,19 +5,20 @@ with open("input.geojson","r",encoding="utf-8") as f:
     data=json.load(f)
 
 
-#gj_structure={'type': 'FeatureCollection'}
-#gj_structure['features']=filtered_points
 
-#vyfiltrovani seznamu obsahujici id a souradnice bodu
-filtered_points=[]
+#vyfiltrovani souradnic bodu
+point_coordinates=[]
 for feat in data["features"]:
     coordinates=(feat['geometry']['coordinates'])
-    id=(feat['properties']['@id'])
-    filtered_points.append([id,coordinates])
+    point_coordinates.append(coordinates)
 
 
-print(data)
-print(filtered_points)
+print(point_coordinates)
+
+
+gj_structure={'type': 'FeatureCollection'}
+gj_structure['features']=#nejaka_promenna
+
 #vystup dat
-#with open("output.geojson","w",encoding="utf-8") as f:
-#    json.dump(,indent=2,ensure_ascii=False)
+with open("output.geojson","w",encoding="utf-8") as f:
+    json.dump(gj_structure,f,indent=2,ensure_ascii=False)
