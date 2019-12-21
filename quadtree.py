@@ -6,54 +6,76 @@ with open("input.geojson","r",encoding="utf-8") as f:
 
 
 
+
 #vyfiltrovani souradnic bodu
 point_coordinates=[]
-for feat in data["features"]:
+for feat in data['features']:
     coordinates=(feat['geometry']['coordinates'])
+    features=data['features']
     point_coordinates.append(coordinates)
 print(point_coordinates)
-
-def zkouska(coordinates):
-    pass
-    #if len(coordinates)<50:
-     #   for
-      #  return coordinates
+print(features)
 
 def bounding_box(coordinates):
     #seradit podle osy x
     coordinates.sort(key = lambda p: p[0])
-    xmin=coordinates[0]
-    xmax=coordinates[-1]
+    xminimum=coordinates[0]
+    xmaximum=coordinates[-1]
 
     #seradit podle osy y
     coordinates.sort(key=lambda p: p[1])
-    ymin=coordinates[0]
-    ymax=coordinates[-1]
+    yminimum=coordinates[0]
+    ymaximum=coordinates[-1]
 
-    #stred
-    xmiddle=(xmin[0]+xmax[0])/2
-    ymiddle=(ymin[1] + ymax[1]) / 2
-
-    return(xmiddle,ymiddle)
-
-    #1. kvadrant
-    if x>xmid and y>mid
-
-    # 2. kvadrant
-    if x > xmid and y < mid
-
-    #3. kvadrant
-    if x < xmid and y < mid
-
-    #4.kvadrant
-    if x < xmid and y > mid
+    return (xminimum,xmaximum,yminimum,ymaximum)
 
 
 
+def quadtree(points,xmin,xmax,ymin,ymax):
+    #stredy
+    xmid = (xmin + xmax) / 2
+    ymid = (ymin + ymax) / 2
+
+    if len(points)<50:
+        cluster_ID = cluster_number[0]
+        for index in points:
+            index['properties']['cluster_ID']=cluster_ID
+        cluster_temporary=cluster_counter.pop()
+        cluster_umber.append(cluster_temporary+1)
+        return(features)
+    else:
+        for feat in points:
+            point=feat(['geometry']['coordinates'])
+        #1. kvadrant
+            if point[0] >= xmid and point[1] >=ymid:
+                K1.append(point)
+        # 2. kvadrant
+            elif point[0] > xmid and point[1] <= ymid:
+                K2.append(point)
+        #3. kvadrant
+            elif point[0] <= xmid and point[1] < ymid:
+                K3.append(point)
+        #4. kvadrant
+            elif point[0] < xmid and point[1] >= ymid:
+                K4.append(point)
+
+    #rekurze na jednotlive kvadranty
+    quadtree(K1,xmid,xmax,ymid,ymax)
+    quadtree(K2,xmin,xmid,ymid,ymax)
+    quadtree(K3,xmin,xmid,ymin,ymid)
+    quadtree(K4,xmid,xmax,ymin,ymid)
 
 
-bounding_box(point_coordinates)
 
+b_box=bounding_box(point_coordinates)
+
+print(b_box)
+print((b_box[2][0]),(b_box[1][0]),(b_box[2][1]),(b_box[3][1]))
+K1 = []
+K2 = []
+K3 = []
+K4 = []
+quadtree(features,(b_box[0][0]),(b_box[1][0]),(b_box[2][1]),(b_box[3][1]))
 
 
 
