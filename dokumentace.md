@@ -10,7 +10,7 @@ Funkce `bounding_box` seřadí body podle velikosti a najde body s nejmenšími 
 
 Minima a maxima jsou přenesena do funkce `kvad_strom`, kde je na jejich základě vypočítán střed čtyřuhelníku, což umožňuje dělení na čtyři kvadranty.
 To do jakého kvadrantu bod patří je určovány v závislosti na poloze vůči středu. Pokud se v nějakém kvadrantu vyskytuje méně než 50 bodů, daným bodům je přiřazeno specifické Cluster ID. 
-Funkce je rekurzivní a volá sama sebe znovu, dokud nejsou všechny body rozděleny do kvadrantů.
+Funkce je rekurzivní a volá sama sebe znovu, dokud nejsou všechny body rozděleny do kvadrantů. I.  kvadrant je určen intervalem (x střed; x maximum) a (y střed; y maximum); II. kvadrant. (x minimum; x střed) a (y sřed; y maximum); III. kvadrant (x minimum; x střed) a (y minimum; y střed) ; IV. kvadrant (x střed; x maximum) a (y minimum; y střed) .
 
 
 Výstupem je soubour s názvem output ve fomátu `GeoJSON`, kde každý bod má zachované hodnoty vstupního souboru a zároveň přiřazené Cluster ID. 
